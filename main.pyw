@@ -108,6 +108,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
 
+
     def browse(self):
         global dir_
         dir_ = QFileDialog.getExistingDirectory(None, 'Select a folder:', '', QFileDialog.ShowDirsOnly)
@@ -124,9 +125,10 @@ class Ui_MainWindow(object):
                 self.O_start.show()
 
 
+
     def Lrefresh(self):
         self.log_text.clear()
-        system(f"cd {dir_} && git log > s.txt")
+        system(f"cd {dir_} && git log > ignore.txt")
         if name == 'nt' :
             file = open(fr"{dir_}\.git\logs\HEAD")
 
@@ -143,31 +145,36 @@ class Ui_MainWindow(object):
             self.log_text.appendPlainText(log)
             self.log_text.appendPlainText('\n-----------------------------------------------------------------------------------')
         file.close()
-        remove(f"{dir_}/s.txt")
+        remove(f"{dir_}/ignore.txt")
         
+
 
     def Srefresh(self):
         self.status_text.clear()
-        system(f"cd {dir_} && git status > s.txt")
+        system(f"cd {dir_} && git status > ignore.txt")
         if name == 'nt' :
             file = open(fr"{dir_}\s.txt")
 
         elif name == 'posix' :
-            file = open(f"{dir_}/s.txt")
+            file = open(f"{dir_}/ignore.txt")
 
         for line in file.readlines():
             self.status_text.appendPlainText(line.strip('\n'))
         file.close()
-        remove(f"{dir_}/s.txt")
+        remove(f"{dir_}/ignore.txt")
+
 
 
     def make(self):
-        adr = self.line3.text().strip().strip('[').strip(']')
-        system(f"cd {dir_} && git remote add origin {adr}")
+        global adr
+        adr = self.line3.text().strip().strip('[').strip(']').split('|')
+        system(f"cd {dir_} && git remote add origin {adr[0]}")
+
 
 
     def push(self):
-        system(f"cd {dir_} && git push origin master")
+        system(f"cd {dir_} && git push origin master && echo {adr[1]}")
+
 
 
     def save(self):
@@ -177,15 +184,17 @@ class Ui_MainWindow(object):
         system(f"cd {dir_} && git commit -m '{com}'")
 
 
+
     def start(self):
         system(f"cd {dir_} && git init")
         self.O_start.hide()
 
 
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Git"))
-        self.line3.setPlaceholderText(_translate("MainWindow", "github  repository  address"))
+        self.line3.setPlaceholderText(_translate("MainWindow", "github  repository  address|your  password "))
         self.O_make.setText(_translate("MainWindow", "remote"))
         self.O_push.setText(_translate("MainWindow", "PUSH"))
         self.line2.setPlaceholderText(_translate("MainWindow", "comment"))
@@ -200,6 +209,7 @@ class Ui_MainWindow(object):
         self.OL_refresh.setText(_translate("MainWindow", "Refresh"))
         self.log_text.setPlainText(_translate("MainWindow", ""))
         self.tab_4.setTabText(self.tab_4.indexOf(self.tab_2), _translate("MainWindow", "log"))
+
 
 
 if __name__ == "__main__":
