@@ -193,7 +193,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Git"))
-        self.line3.setPlaceholderText(_translate("MainWindow", "github  repository  address|your  password "))
+        self.line3.setPlaceholderText(_translate("MainWindow", "github  repository  address"))
         self.O_make.setText(_translate("MainWindow", "remote"))
         self.O_push.setText(_translate("MainWindow", "PUSH"))
         self.line2.setPlaceholderText(_translate("MainWindow", "comment"))
