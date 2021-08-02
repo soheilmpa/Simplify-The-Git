@@ -166,14 +166,13 @@ class Ui_MainWindow(object):
 
 
     def make(self):
-        global adr
-        adr = self.line3.text().strip().strip('[').strip(']').split('|')
-        system(f"cd {dir_} && git remote add origin {adr[0]}")
+        adr = self.line3.text().strip().strip('[').strip(']')
+        system(f"cd {dir_} && git remote add origin {adr}")
 
 
 
     def push(self):
-        system(f"cd {dir_} && git push origin master && echo {adr[1]}")
+        system(f"cd {dir_} && git push origin master")
 
 
 
