@@ -110,58 +110,81 @@ class Ui_MainWindow(object):
 
 
     def browse(self):
+        '''
+            it opens the directory which the project is in it
+            and add the directory to the QLineEdit
+
+            if  ".git"  were in that directory :
+                The start button will be hidden
+        '''
         global dir_
         dir_ = QFileDialog.getExistingDirectory(None, 'Select a folder:', '', QFileDialog.ShowDirsOnly)
         self.line1.setText(dir_)
-        if name == 'nt' :
-            if path.isdir(fr"{dir_}\.git") :
-                self.O_start.hide()
-            else :
-                self.O_start.show()
-        elif name == 'posix' :
-            if path.isdir(f"{dir_}/.git") :
-                self.O_start.hide()
-            else :
-                self.O_start.show()
+        #         for windows           |          for linux
+        if path.isdir(fr"{dir_}\.git") or path.isdir(f"{dir_}/.git") :
+            self.O_start.hide()
+        else :
+            self.O_start.show()
+
 
 
 
     def Lrefresh(self):
+        '''
+            Log Refresh :
+            1) clear the text box
+            2) get the log from "git log"
+            3) save the output in ../ignore.txt
+
+        '''
+        def add_to_the_textBox(file):
+            for line in file.readlines():
+                log = ""
+                things = line.split()
+                self.log_text.appendPlainText(things[1])
+                self.log_text.appendPlainText(f"{things[2]}  -  {things[3]}")
+                for i in things[6:]:
+                    log += i + " "
+                self.log_text.appendPlainText(log)
+                self.log_text.appendPlainText('\n'+'-'*90)
+            file.close()
+
+
         self.log_text.clear()
-        system(f"cd {dir_} && git log > ignore.txt")
-        if name == 'nt' :
+        # system(f"cd {dir_} && git log > ../ignore.txt")
+        if name == 'nt' : # for windows
             file = open(fr"{dir_}\.git\logs\HEAD")
+            add_to_the_textBox(file)
+            # remove(fr"{dir_}\..\ignore.txt")
 
-        elif name == 'posix' :
+        elif name == 'posix' : # for linux
             file = open(f"{dir_}/.git/logs/HEAD")
+            add_to_the_textBox(file)
+            # remove(f"{dir_}/../ignore.txt")
 
-        for line in file.readlines():
-            log = ""
-            things = line.split()
-            self.log_text.appendPlainText(things[1])
-            self.log_text.appendPlainText(f"{things[2]}  -  {things[3]}")
-            for i in things[6:]:
-                log += i + " "
-            self.log_text.appendPlainText(log)
-            self.log_text.appendPlainText('\n-----------------------------------------------------------------------------------')
-        file.close()
-        remove(f"{dir_}/ignore.txt")
-        
 
 
     def Srefresh(self):
         self.status_text.clear()
-        system(f"cd {dir_} && git status > ignore.txt")
-        if name == 'nt' :
-            file = open(fr"{dir_}\s.txt")
+        if name == 'nt' : # for windows
+            system(fr"cd {dir_} && git status > ..\ignore.txt")
+            file = open(fr"{dir_}\..\ignore.txt")
 
-        elif name == 'posix' :
-            file = open(f"{dir_}/ignore.txt")
+            for line in file.readlines():
+                self.status_text.appendPlainText(line.strip('\n'))
 
-        for line in file.readlines():
-            self.status_text.appendPlainText(line.strip('\n'))
+            remove(fr"{dir_}\..\ignore.txt")
+
+        elif name == 'posix' : # for linux
+            system(f"cd {dir_} && git status > ../ignore.txt")
+            file = open(f"{dir_}/../ignore.txt")
+
+            for line in file.readlines():
+                self.status_text.appendPlainText(line.strip('\n'))
+
+            remove(f"{dir_}/../ignore.txt")
+
         file.close()
-        remove(f"{dir_}/ignore.txt")
 
 
 
