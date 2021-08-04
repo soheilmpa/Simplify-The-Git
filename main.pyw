@@ -133,8 +133,8 @@ class Ui_MainWindow(object):
         '''
             Log Refresh :
             1) clear the text box
-            2) get the log from "git log"
-            3) save the output in ../ignore.txt
+            2) read the log file
+            3) add to the text box
 
         '''
         def add_to_the_textBox(file):
@@ -149,57 +149,74 @@ class Ui_MainWindow(object):
                 self.log_text.appendPlainText('\n'+'-'*90)
             file.close()
 
-
         self.log_text.clear()
-        # system(f"cd {dir_} && git log > ../ignore.txt")
-        if name == 'nt' : # for windows
-            file = open(fr"{dir_}\.git\logs\HEAD")
-            add_to_the_textBox(file)
-            # remove(fr"{dir_}\..\ignore.txt")
+        try:
+            if name == 'nt' : # for windows
+                file = open(fr"{dir_}\.git\logs\HEAD")
+                add_to_the_textBox(file)
 
-        elif name == 'posix' : # for linux
-            file = open(f"{dir_}/.git/logs/HEAD")
-            add_to_the_textBox(file)
-            # remove(f"{dir_}/../ignore.txt")
+            elif name == 'posix' : # for linux
+                file = open(f"{dir_}/.git/logs/HEAD")
+                add_to_the_textBox(file)
+        except:
+            self.log_text.appendPlainText("\nat first Browse the project file")
 
 
 
     def Srefresh(self):
+        '''
+            Status Refresh :
+            1) clear the text box
+            2) get the output of "git status" and save it in "temp.txt"
+            3) add to the text box
+            4) remove temp file
+
+        '''
+        def add_to_the_textBox(file):
+            for line in file.readlines():
+                self.status_text.appendPlainText(line.strip('\n'))
+            file.close()
+
         self.status_text.clear()
-        if name == 'nt' : # for windows
-            system(fr"cd {dir_} && git status > ..\ignore.txt")
-            file = open(fr"{dir_}\..\ignore.txt")
+        try:
+            if name == 'nt' : # for windows
+                system(fr"cd {dir_} && git status > ..\itemp.txt")
+                file = open(fr"{dir_}\..\temp.txt")
+                add_to_the_textBox(file)
+                remove(fr"{dir_}\..\temp.txt")
 
-            for line in file.readlines():
-                self.status_text.appendPlainText(line.strip('\n'))
-
-            remove(fr"{dir_}\..\ignore.txt")
-
-        elif name == 'posix' : # for linux
-            system(f"cd {dir_} && git status > ../ignore.txt")
-            file = open(f"{dir_}/../ignore.txt")
-
-            for line in file.readlines():
-                self.status_text.appendPlainText(line.strip('\n'))
-
-            remove(f"{dir_}/../ignore.txt")
-
-        file.close()
+            elif name == 'posix' : # for linux
+                system(f"cd {dir_} && git status > ../temp.txt")
+                file = open(f"{dir_}/../temp.txt")
+                add_to_the_textBox(file)
+                remove(f"{dir_}/../temp.txt")
+        except:
+            self.status_text.appendPlainText("\nat first Browse the project file")
 
 
 
     def make(self):
+        '''
+            add origin remote
+        '''
         adr = self.line3.text().strip().strip('[').strip(']')
         system(f"cd {dir_} && git remote add origin {adr}")
 
 
 
     def push(self):
+        '''
+            Not complete
+            only works with these names : "origin" "master"
+        '''
         system(f"cd {dir_} && git push origin master")
 
 
 
     def save(self):
+        '''
+            add all the changes to Stage and commit them
+        '''
         system(f"cd {dir_} && git add -A")
         com = self.line2.text()
         self.line2.setText('')
@@ -208,29 +225,40 @@ class Ui_MainWindow(object):
 
 
     def start(self):
+        '''
+           Initialize the git
+           and now hide the start button because ".git" maded
+        '''
         system(f"cd {dir_} && git init")
         self.O_start.hide()
-
 
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Git"))
+
+        ############### Line Edit ###############
+        self.line1.setPlaceholderText(_translate("MainWindow", "your  project  directory"))
+        self.line2.setPlaceholderText(_translate("MainWindow", "comment"))
         self.line3.setPlaceholderText(_translate("MainWindow", "github  repository  address"))
+
+        ############### Push Button ###############
         self.O_make.setText(_translate("MainWindow", "remote"))
         self.O_push.setText(_translate("MainWindow", "PUSH"))
-        self.line2.setPlaceholderText(_translate("MainWindow", "comment"))
         self.O_save.setText(_translate("MainWindow", "save"))
-        self.line1.setPlaceholderText(_translate("MainWindow", "your  project  directory"))
         self.O_browse.setText(_translate("MainWindow", "browse"))
         self.O_start.setText(_translate("MainWindow", "start"))
-        self.tab_4.setTabText(self.tab_4.indexOf(self.tab), _translate("MainWindow", "main"))
-        self.OS_refresh.setText(_translate("MainWindow", "Refresh"))
-        self.status_text.setPlainText(_translate("MainWindow", ""))
-        self.tab_4.setTabText(self.tab_4.indexOf(self.tab_3), _translate("MainWindow", "status"))
         self.OL_refresh.setText(_translate("MainWindow", "Refresh"))
+        self.OS_refresh.setText(_translate("MainWindow", "Refresh"))
+
+        ############### Text Box ###############
+        self.status_text.setPlainText(_translate("MainWindow", ""))
         self.log_text.setPlainText(_translate("MainWindow", ""))
+
+        ############### Tab ###############
+        self.tab_4.setTabText(self.tab_4.indexOf(self.tab), _translate("MainWindow", "main"))
         self.tab_4.setTabText(self.tab_4.indexOf(self.tab_2), _translate("MainWindow", "log"))
+        self.tab_4.setTabText(self.tab_4.indexOf(self.tab_3), _translate("MainWindow", "status"))
 
 
 
