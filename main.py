@@ -11,101 +11,92 @@ class Ui_MainWindow(object):
 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        
+
         self.tabs = QtWidgets.QTabWidget(self.centralwidget)
         self.tabs.setGeometry(QtCore.QRect(0, 0, 571, 311))
         self.tabs.setObjectName("tabs")
+
         self.tab_1 = QtWidgets.QWidget()
         self.tab_1.setObjectName("tab_1")
-        self.horizontalLayoutWidget_3 = QtWidgets.QWidget(self.tab_1)
-        self.horizontalLayoutWidget_3.setGeometry(QtCore.QRect(20, 160, 531, 41))
-        self.horizontalLayoutWidget_3.setObjectName("horizontalLayoutWidget_3")
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_3)
-        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.line3 = QtWidgets.QLineEdit(self.horizontalLayoutWidget_3)
-        self.line3.setObjectName("line3")
-        self.horizontalLayout_3.addWidget(self.line3)
-        self.O_make = QtWidgets.QPushButton(self.horizontalLayoutWidget_3)
-        self.O_make.setObjectName("O_make")
-        self.horizontalLayout_3.addWidget(self.O_make)
-        self.O_push = QtWidgets.QPushButton(self.tab_1)
-        self.O_push.setGeometry(QtCore.QRect(210, 220, 131, 31))
-        self.O_push.setObjectName("O_push")
+        self.tab_2 = QtWidgets.QWidget()
+        self.tab_2.setObjectName("tab_2")
+        self.tab_3 = QtWidgets.QWidget()
+        self.tab_3.setObjectName("tab_3")
+
+        self.tabs.addTab(self.tab_1, "")
+        self.tabs.addTab(self.tab_2, "")
+        self.tabs.addTab(self.tab_3, "")
+
+        self.horizontalLayoutWidget_1 = QtWidgets.QWidget(self.tab_1)
+        self.horizontalLayoutWidget_1.setGeometry(QtCore.QRect(20, 10, 531, 51))
+        self.horizontalLayoutWidget_1.setObjectName("horizontalLayoutWidget_1")
+        self.horizontalLayout_1 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_1)
+        self.horizontalLayout_1.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_1.setObjectName("horizontalLayout_1")
+
         self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.tab_1)
         self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(20, 110, 531, 41))
         self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.line2 = QtWidgets.QLineEdit(self.horizontalLayoutWidget_2)
-        self.line2.setInputMask("")
-        self.line2.setText("")
-        self.line2.setObjectName("line2")
-        self.horizontalLayout_2.addWidget(self.line2)
-        self.O_save = QtWidgets.QPushButton(self.horizontalLayoutWidget_2)
-        self.O_save.setObjectName("O_save")
-        self.horizontalLayout_2.addWidget(self.O_save)
-        self.horizontalLayoutWidget_4 = QtWidgets.QWidget(self.tab_1)
-        self.horizontalLayoutWidget_4.setGeometry(QtCore.QRect(20, 10, 531, 51))
-        self.horizontalLayoutWidget_4.setObjectName("horizontalLayoutWidget_4")
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_4)
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        
-        self.line1 = QtWidgets.QLineEdit(self.horizontalLayoutWidget_4)
+
+        self.horizontalLayoutWidget_3 = QtWidgets.QWidget(self.tab_1)
+        self.horizontalLayoutWidget_3.setGeometry(QtCore.QRect(20, 160, 531, 41))
+        self.horizontalLayoutWidget_3.setObjectName("horizontalLayoutWidget_3")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_3)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+
+        self.line1 = QtWidgets.QLineEdit(self.horizontalLayoutWidget_1)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.line1.setFont(font)
-        self.line1.setInputMask("")
-        self.line1.setText("")
-        self.line1.setMaxLength(32767)
+        self.line1.setMaxLength(1000)
         self.line1.setFrame(True)
-        self.line1.setDragEnabled(False)
         self.line1.setReadOnly(True)
-        self.line1.setClearButtonEnabled(False)
         self.line1.setObjectName("line1")
-        self.horizontalLayout_4.addWidget(self.line1)
-
-        self.O_browse = QtWidgets.QPushButton(self.horizontalLayoutWidget_4)
+        self.line2 = QtWidgets.QLineEdit(self.horizontalLayoutWidget_2)
+        self.line2.setObjectName("line2")
+        self.line3 = QtWidgets.QLineEdit(self.horizontalLayoutWidget_3)
+        self.line3.setObjectName("line3")
+        
+        self.O_make = QtWidgets.QPushButton(self.horizontalLayoutWidget_3)
+        self.O_make.setObjectName("O_make")
+        self.O_push = QtWidgets.QPushButton(self.tab_1)
+        self.O_push.setGeometry(QtCore.QRect(210, 220, 131, 31))
+        self.O_push.setObjectName("O_push")
+        self.O_save = QtWidgets.QPushButton(self.horizontalLayoutWidget_2)
+        self.O_save.setObjectName("O_save")
+        self.O_browse = QtWidgets.QPushButton(self.horizontalLayoutWidget_1)
         self.O_browse.setObjectName("O_browse")
-        self.horizontalLayout_4.addWidget(self.O_browse)
-
         self.O_start = QtWidgets.QPushButton(self.tab_1)
         self.O_start.setGeometry(QtCore.QRect(210, 70, 131, 31))
         self.O_start.setDefault(False)
         self.O_start.setObjectName("O_start")
-
-        
-        self.tab_2 = QtWidgets.QWidget()
-        self.tab_2.setObjectName("tab_2")
-
         self.OS_refresh = QtWidgets.QPushButton(self.tab_2)
         self.OS_refresh.setGeometry(QtCore.QRect(0, 0, 561, 31))
         self.OS_refresh.setObjectName("OS_refresh")
+        self.OL_refresh = QtWidgets.QPushButton(self.tab_3)
+        self.OL_refresh.setGeometry(QtCore.QRect(0, 0, 561, 31))
+        self.OL_refresh.setObjectName("OL_refresh")
 
         self.status_text = QtWidgets.QPlainTextEdit(self.tab_2)
         self.status_text.setGeometry(QtCore.QRect(0, 30, 561, 241))
         self.status_text.setReadOnly(True)
         self.status_text.setObjectName("status_test")
-        
-        self.tab_3 = QtWidgets.QWidget()
-        self.tab_3.setObjectName("tab_3")
-
-        self.OL_refresh = QtWidgets.QPushButton(self.tab_3)
-        self.OL_refresh.setGeometry(QtCore.QRect(0, 0, 561, 31))
-        self.OL_refresh.setObjectName("OL_refresh")
-
         self.log_text = QtWidgets.QPlainTextEdit(self.tab_3)
         self.log_text.setGeometry(QtCore.QRect(0, 30, 561, 241))
         self.log_text.setReadOnly(True)
         self.log_text.setObjectName("log_text")
 
+        self.horizontalLayout_1.addWidget(self.line1)
+        self.horizontalLayout_1.addWidget(self.O_browse)
+        self.horizontalLayout_2.addWidget(self.line2)
+        self.horizontalLayout_2.addWidget(self.O_save)
+        self.horizontalLayout_3.addWidget(self.line3)
+        self.horizontalLayout_3.addWidget(self.O_make)
 
-        self.tabs.addTab(self.tab_1, "")
-        self.tabs.addTab(self.tab_2, "")
-        self.tabs.addTab(self.tab_3, "")
-        
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
         self.tabs.setCurrentIndex(0)
@@ -170,7 +161,7 @@ class Ui_MainWindow(object):
                 file = open(f"{dir_}/.git/logs/HEAD")
                 add_to_the_textBox(file)
         except:
-            self.log_text.appendPlainText("\nat first Browse the project file")
+            self.log_text.appendPlainText("\nat  first  Browse  the  project  file  or  Commit  something")
 
 
 
@@ -202,7 +193,7 @@ class Ui_MainWindow(object):
                 add_to_the_textBox(file)
                 remove(f"{dir_}/../temp.txt")
         except:
-            self.status_text.appendPlainText("\nat first Browse the project file")
+            self.status_text.appendPlainText("\nat  first  Browse  the  project  file")
 
 
 
@@ -271,7 +262,6 @@ class Ui_MainWindow(object):
         self.tabs.setTabText(self.tabs.indexOf(self.tab_2), _translate("MainWindow", "status"))
         self.tabs.setTabText(self.tabs.indexOf(self.tab_3), _translate("MainWindow", "log"))
         
-
 
 
 if __name__ == "__main__":
