@@ -54,6 +54,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_4)
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        
         self.line1 = QtWidgets.QLineEdit(self.horizontalLayoutWidget_4)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -67,34 +68,46 @@ class Ui_MainWindow(object):
         self.line1.setClearButtonEnabled(False)
         self.line1.setObjectName("line1")
         self.horizontalLayout_4.addWidget(self.line1)
+
         self.O_browse = QtWidgets.QPushButton(self.horizontalLayoutWidget_4)
         self.O_browse.setObjectName("O_browse")
         self.horizontalLayout_4.addWidget(self.O_browse)
+
         self.O_start = QtWidgets.QPushButton(self.tab)
         self.O_start.setGeometry(QtCore.QRect(210, 70, 131, 31))
         self.O_start.setDefault(False)
         self.O_start.setObjectName("O_start")
-        self.tab_4.addTab(self.tab, "")
+
+        
         self.tab_3 = QtWidgets.QWidget()
         self.tab_3.setObjectName("tab_3")
+
         self.OS_refresh = QtWidgets.QPushButton(self.tab_3)
         self.OS_refresh.setGeometry(QtCore.QRect(0, 0, 561, 31))
         self.OS_refresh.setObjectName("OS_refresh")
+
         self.status_text = QtWidgets.QPlainTextEdit(self.tab_3)
         self.status_text.setGeometry(QtCore.QRect(0, 30, 561, 241))
         self.status_text.setReadOnly(True)
         self.status_text.setObjectName("status_test")
-        self.tab_4.addTab(self.tab_3, "")
+        
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
+
         self.OL_refresh = QtWidgets.QPushButton(self.tab_2)
         self.OL_refresh.setGeometry(QtCore.QRect(0, 0, 561, 31))
         self.OL_refresh.setObjectName("OL_refresh")
+
         self.log_text = QtWidgets.QPlainTextEdit(self.tab_2)
         self.log_text.setGeometry(QtCore.QRect(0, 30, 561, 241))
         self.log_text.setReadOnly(True)
         self.log_text.setObjectName("log_text")
+
+
+        self.tab_4.addTab(self.tab, "")
+        self.tab_4.addTab(self.tab_3, "")
         self.tab_4.addTab(self.tab_2, "")
+        
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
         self.tab_4.setCurrentIndex(0)
@@ -257,8 +270,9 @@ class Ui_MainWindow(object):
 
         ############### Tab ###############
         self.tab_4.setTabText(self.tab_4.indexOf(self.tab), _translate("MainWindow", "main"))
-        self.tab_4.setTabText(self.tab_4.indexOf(self.tab_2), _translate("MainWindow", "log"))
         self.tab_4.setTabText(self.tab_4.indexOf(self.tab_3), _translate("MainWindow", "status"))
+        self.tab_4.setTabText(self.tab_4.indexOf(self.tab_2), _translate("MainWindow", "log"))
+        
 
 
 
