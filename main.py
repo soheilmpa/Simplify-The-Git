@@ -182,7 +182,7 @@ class Ui_MainWindow(object):
         self.status_text.clear()
         try:
             if name == 'nt' : # for windows
-                system(fr"cd {dir_} && git status > ..\itemp.txt")
+                system(fr"cd {dir_} && git status > ..\temp.txt")
                 file = open(fr"{dir_}\..\temp.txt")
                 add_to_the_textBox(file)
                 remove(fr"{dir_}\..\temp.txt")
